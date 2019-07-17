@@ -1,0 +1,15 @@
+* {
+  font-size: 62.5%;
+  color: #2e2e2e;
+}
+
+li {
+  list-style: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+
