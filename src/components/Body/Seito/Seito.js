@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const SeitoCard = styled.div`
-    .seito h3{
-        font-size: 3rem;
-    }
-    .seito p {
-        font-size: 2.4rem;
-    }
-`
-
 const seitoAttributeList = [
     'taxUp', 
     'taxDown',
@@ -159,7 +150,7 @@ const seitoObj = [
         'secretLaw': null,
         'america': null,
         'nhk': 'NHK料金の支払い義務などを無くしていく方針',
-        'attribute': ['taxUp', 'changeKenpo','nuclearGo','keepAmerica','dutySchoolFree'],
+        'attribute': ['nhk'],
     },
     { 
         'name': '安楽死制度を考える会',
@@ -171,9 +162,40 @@ const seitoObj = [
         'secretLaw': null,
         'america': null,
         'death': '安楽死を選択できるようにしていく方針',
-        'attribute': ['taxUp', 'changeKenpo','nuclearGo','keepAmerica','dutySchoolFree'],
+        'attribute': ['death'],
     },
 ]
+
+const SeitoCard = styled.div`
+    width: 90vw;
+    max-width: 40rem;
+    margin: 0 auto;
+
+    .seito {
+        border: solid 0.4rem #ff7152;
+        border-radius: 3rem;
+        padding: 1rem 2rem 2rem 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .seito h3{
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        color: #ff7152;
+    }
+    .seito p {
+        font-size: 2.4rem;
+        border-bottom: solid 0.2rem #ff7152;
+    }
+    .seito li {
+        font-size: 1.8rem;        
+        margin: 0.7rem 0 1rem 0;
+    }
+
+    .seito-content {
+        margin-bottom: 2rem;
+    }
+`
 
 export default class Seito extends Component {
     render() {
@@ -182,7 +204,7 @@ export default class Seito extends Component {
                 <div className="seito">
                     <h3>{seitoObj[0].name}</h3>
                     <div className="seito-content">
-                        <p className="tax" value="up" >消費税</p>
+                        <p>消費税</p>
                         <li>消費税率10%へ引き上げ予定(10月)。社会保障と財政健全化に当てる税収とする。</li>
                     </div>
                     <div className="seito-content">
