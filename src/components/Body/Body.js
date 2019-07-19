@@ -1,3 +1,6 @@
+//あとで修正
+//教育無償化の連続
+//文字サイズのレスポンス対応
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { attributeBtn, seitoContents, seitoObj } from './SeitoData';
@@ -47,8 +50,21 @@ const SeitoCard = styled.div`
     }
 `
 
-const BodyContent = styled.div`
+const FilterButton = styled.div`
+    // display: inline-flex;
+    width: 80vw;
+    margin: 0 auto;
+    padding: 1.2rem;
+    // text-align:center;
 `
+
+const BodyContent = styled.div`
+    
+`
+
+const filterCreate = filter => {
+    console.log('テスト', filter)
+}
 
 export default class Body extends Component {
     constructor(props){
@@ -59,10 +75,16 @@ export default class Body extends Component {
     }
 
     handleClick(attribute) {
+        
         const attributes = this.state.filter
         attributes.push(attribute)
         this.setState({ filter: attributes })
+        filterCreate(this.state.filter)
+        // this.getfilter(this.state.filter)
+    }
 
+    getfliter(filter) {
+            console.log('filter作動')
     }
 
     renderSeito(){
@@ -102,21 +124,6 @@ export default class Body extends Component {
                 
             }
 
-
-            // for(let i in attribute){
-            //     const seitoContentKey = Object.keys(seitoContents[i])
-            //     console.log(seitoContentKey)
-            //     const seitoContentValue = Object.values(seitoContents[i])
-            //     //政党のattributeを取り出してseitContentオブジェクトと一致するものだけ取り出す。説明文章も一緒に。
-            //     // console.log(attribute[i], seitoContentKey[0])
-
-            //     if(attribute[i] == seitoContentKey[0]){ 
-            //         const description = seitoObj[seitoContentValue[1]]
-            //         console.log(description)
-            //         const addAgenda = [ seitoContentValue[0], description ]
-            //         agendas.push( addAgenda )
-            //     }
-            // }
             const agendaList = getAgenda.map(agenda => {
                 return (
                     <div className="seito-content">
@@ -141,21 +148,21 @@ export default class Body extends Component {
 
     render() {
 
+        
         const btnList = attributeBtn.map((attribute) =>
             <Filter
-                value={Object.values(attribute)}
+                value={Object.values(attribute)}                
                 onClick={() => this.handleClick(Object.keys(attribute))}
             />
-      );
+        );
         
-
         return (
             <BodyContent>
                 <Description>
                     <p>忙しい人は消去法で政党を選ぼう！</p>
                     <p>好きなフィルターを選んでね♪</p>
                 </Description>
-                <div className="filterBtn">{btnList}</div>
+                <FilterButton>{btnList}</FilterButton>
                 <Result/>
                 {this.renderSeito()}
             </BodyContent>
