@@ -1,43 +1,41 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-
-const seitoAttributeList = [
-    'taxUp', 
-    'taxDown',
-    'changeKenpo',
-    'protectKenpo',
-    'dutySchoolFree',
-    'univercityFree',
-    'nuclearZero',
-    'nuclearGo',
-    'keepAmerica',
-    'fairAmerica',
-    'lgbtOk',
-    'NoSecretLaw',
-    'nhk',
-    'death',
+export const attributeBtn = [
+    {'taxUp': '消費税の増税◎'},
+    {'taxDown': '消費税の増税✖'},
+    {'changeKenpo': '憲法の改正◎'},
+    {'protectKenpo': '憲法の改正✖'},
+    {'dutySchoolFree': '幼児・義務教育の無償化'},
+    {'univercityFree': '大学の無償化'},
+    {'nuclearZero': '原発ゼロ社会'},
+    {'nuclearGo': '原発再稼働◎'},
+    {'keepAmerica': '日米同盟の維持・強化◎'},
+    {'fairAmerica': '日米同盟からの独立路線'},
+    {'lgbtOk': '同性婚の自由化'},
+    {'NoSecretLaw': '特定秘密保護法の廃止'},
+    {'nhk': 'NHK受信料の支払い拒否促進'},
+    {'death': '安楽死◎'},
+    {'basicIncome': 'ベーシックインカム制度の導入'}
 ]
 
-const attributeBtn = {
-    'taxUp': '消費税の増税◎',
-    'taxDown': '消費税の増税✖',
-    'changeKenpo': '憲法の改正◎',
-    'protectKenpo': '憲法の改正✖',
-    'dutySchoolFree': '幼児・義務教育の無償化',
-    'univercityFree': '大学の無償化',
-    'nuclearZero': '原発ゼロ社会',
-    'nuclearGo': '原発再稼働◎',
-    'keepAmerica': '日米同盟の維持・強化◎',
-    'fairAmerica': '日米同盟からの独立路線',
-    'lgbtOk': '同性婚の自由化',
-    'NoSecretLaw': '特定秘密保護法の廃止',
-    'nhk': 'NHK受信料の支払い拒否促進',
-    'death': '安楽死◎',
-    'basicIncome': 'ベーシックインカム制度の導入'
-}
+export const seitoContents = [
+    //seitoObjのattributeの中身と一致していたら中身を取り出す
+    {'taxUp': ['消費税', 'tax']},
+    {'taxDown': ['消費税', 'tax']},
+    {'changeKenpo': ['憲法改正', 'kenpo']},
+    {'protectKenpo': ['憲法改正', 'kenpo']},
+    {'dutySchoolFree': ['教育無償化', 'education']},
+    {'univercityFree': ['教育無償化', 'education']},
+    {'nuclearZero': ['原発', 'nuclear']},
+    {'nuclearGo': ['原発', 'nuclear']},
+    {'keepAmerica': ['日米同盟', 'america']},
+    {'fairAmerica': ['日米同盟', 'america']},
+    {'lgbtOk': ['同性婚の自由化', 'lgbt']},
+    {'NoSecretLaw': ['特定秘密保護法', 'secretLaw']},
+    {'nhk': ['NHK受信料の支払い拒否促進', 'nhk']},
+    {'death': ['安楽死制度', 'death']},
+    {'basicIncome': ['ベーシックインカム制度の導入', 'basicIncome']}
+]
 
-
-const seitoObj = [
+export const seitoObj = [
     { 
         'name': '自民党',
         'tax': '消費増税の路線。10月に消費税率10%へ引き上げる予定。社会保障と財政健全化に当てる税収とする。',
@@ -185,47 +183,21 @@ const seitoObj = [
     },
 ]
 
-const SeitoCard = styled.div`
-    width: 90vw;
-    max-width: 40rem;
-    margin: 0 auto;
-
-    .seito {
-        border: solid 0.4rem #ff7152;
-        border-radius: 3rem;
-        padding: 1rem 2rem 2rem 2rem;
-        margin-bottom: 2rem;
-    }
-    
-    .seito h3{
-        font-size: 3.5rem;
-        margin-bottom: 1rem;
-        color: #ff7152;
-    }
-    .seito p {
-        font-size: 2.4rem;
-        border-bottom: solid 0.2rem #ff7152;
-    }
-    .seito li {
-        font-size: 1.8rem;        
-        margin: 0.7rem 0 1rem 0;
-    }
-
-    .seito-content {
-        margin-bottom: 2rem;
-    }
-`
-
-export default class Seito extends Component {
-    render() {
-
-        return (
-                <div className="seito">
-                    <h3>{this.props.name}</h3>
-                    <div className="seito-content">
-                        {this.props.agenda}
-                    </div>
-                </div>
-        );
-    }
-}
+// バックアップ
+export const a = [
+    {'taxUp': '消費税'},
+    {'taxDown': '消費税'},
+    {'changeKenpo': '憲法改正'},
+    {'protectKenpo': '憲法改正'},
+    {'dutySchoolFree': '教育無償化'},
+    {'univercityFree': '教育無償化'},
+    {'nuclearZero': '原発'},
+    {'nuclearGo': '原発'},
+    {'keepAmerica': '日米同盟'},
+    {'fairAmerica': '日米同盟'},
+    {'lgbtOk': '同性婚の自由化'},
+    {'NoSecretLaw': '特定秘密保護法'},
+    {'nhk': 'NHK受信料の支払い拒否促進'},
+    {'death': '安楽死制度'},
+    {'basicIncome': 'ベーシックインカム制度の導入'}
+]

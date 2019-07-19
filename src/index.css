@@ -12,4 +12,8 @@ code {
     monospace;
 }
 
-
+.filterBtn {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr;
+}
