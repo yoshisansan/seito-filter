@@ -11,18 +11,24 @@ const Twitter = styled.div`
         background-color: #00acee;
         border-radius: 1rem;
         padding: 1.3rem 2rem;
+    }
+    a{
         color: white;
+        font-size: 2rem;
+        text-decoration: none;
+
     }
 `
 export default class Hader extends Component {
     render() {
-        const twitterText = "地球ヲ、宇宙猫デ支配セヨ... ＃宇宙猫";
-        // const twitterLink = `https://twitter.com/share?url=${getTweet}&text=${twitterText}`;
-        // const url = firebase
-        // target=”_blank”
+        const twitterText = "忙しい人は消去法で選んで政党に投票！「政党ふぃるた〜」";
+        const TweetUrl = 'https://filter-seito.firebaseapp.com/'
+        const twitterLink = `https://twitter.com/share?url=${TweetUrl}&text=${twitterText}`;
+        
+        
 
         return (
-            <Twitter><button>Twitterでシェアする</button></Twitter>
+            <Twitter><button><a href={twitterLink} target="_blank">Twitterでシェアする</a></button></Twitter>
         );
         
     }

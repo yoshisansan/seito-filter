@@ -12,7 +12,7 @@ const FooterSeito = styled.footer`
     bottom: 2rem;
     }
     li, a{
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
     li {
         margin-left: 2rem;  
@@ -20,7 +20,7 @@ const FooterSeito = styled.footer`
         padding: 0.2rem 0;
     }
     a {
-        color: aqua;
+        color: blue;
     }
 `
 
