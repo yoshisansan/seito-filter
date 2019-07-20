@@ -144,6 +144,7 @@ export const seitoObj = [
         'lgbt': null,
         'secretLaw': null,
         'america': '軍国主義からのからの脱却路線。',
+        'basicIncome': 'ベーシックインカムの導入。政府が国民へ生活費を配る。低所得者を対象。',
         'attribute': ['taxDown','protectKenpo','nuclearZero','fairAmerica','basicIncome'],
     },
     { 

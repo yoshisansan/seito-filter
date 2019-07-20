@@ -1,5 +1,4 @@
 //あとで修正
-//教育無償化の連続
 //twitterの埋め込み
 import React, { Component } from 'react';
 import styled from 'styled-components';
@@ -8,6 +7,7 @@ import { attributeBtn, seitoContents, seitoObj } from './SeitoData';
 import Filter from './Filter/Filter';
 import Result from './Result/Result';
 import Seito from './Seito/Seito';
+import Twitter from './Twitter/Twitter';
 
 const Description = styled.div`
     text-align: center;
@@ -191,10 +191,25 @@ export default class Body extends Component {
     
             //属性リストに格納しているアジェンダ情報を取得する
             const getAgendaInfo = []
+            let count = 0;
             for(let i in attributeIndex){
-                getAgendaInfo.push(seitoContents[attributeIndex[i]])
+                //重複を排除
+                let target = seitoContents[attributeIndex[i]]
+                if(Object.keys(target) == "univercityFree" || Object.keys(target) == "dutySchoolFree"){
+                    count += 1;
+                }
+
+                if(count != 2){
+                    getAgendaInfo.push(seitoContents[attributeIndex[i]])    
+                } else {
+                    count = 0
+                }
+                
             }
-    
+            // const deleteObj = getAgendaInfo.findIndex(item => item === 'univercityFree')
+            // console.log('go', deleteObj)
+            
+            
             //アジェンダ情報の配列に文章を追加で格納する
             const getAgenda = []
             for(let i in getAgendaInfo){
@@ -262,6 +277,7 @@ export default class Body extends Component {
                 {this.renderBtn()}
                 {this.renderFilter()}
                 {this.renderSeito()}
+                <Twitter/>
             </BodyContent>
         );
     }
