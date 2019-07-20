@@ -48,14 +48,18 @@ const SeitoCard = styled.div`
     .seito-content {
         margin-bottom: 2rem;
     }
+
 `
 
 const FilterButton = styled.div`
-    // display: inline-flex;
     width: 80vw;
     margin: 0 auto;
     padding: 1.2rem;
-    // text-align:center;
+
+    @media only screen and (max-width: 415px) {
+        width: 90vw;
+    }        
+
 `
 
 const BodyContent = styled.div`
@@ -71,37 +75,13 @@ export default class Body extends Component {
         }
     }
 
-    handleClick(attribute, index) {
-        const changeBtnColor = this.state.btnStyle
-        //重複したボタンのインデックスなら削除
-        const deleteClassIndex = changeBtnColor.findIndex(item => item === index)
-        if(deleteClassIndex > -1){
-            changeBtnColor.splice(deleteClassIndex, 1)
-            this.setState({ btnStyle: changeBtnColor })
-        } else {
-            changeBtnColor.push(index)
-            this.setState({ btnStyle: changeBtnColor})
-        }
-
-        const attributes = this.state.filter
-        //重複を探して削除
-        const deleteIndex = attributes.findIndex(item => item === attribute.join())
-        if(deleteIndex > -1){
-            attributes.splice(deleteIndex, 1)
-            return this.setState({ filter: attributes })
-        }        
-        attributes.push(attribute.join())
-        this.setState({ filter: attributes })
-    }
-
     renderBtn(){
         const btnList = attributeBtn.map((attribute, index, self) => {
             // this.setState({ })
             const getIndex = this.state.btnStyle
-            console.log(getIndex, index)
             if(getIndex.indexOf(index) >= 0){
                 return (
-                    <Filter
+                <Filter
                     key={index}
                     className="seitoBtn changeColor"
                     value={Object.values(attribute)}                
@@ -124,11 +104,49 @@ export default class Body extends Component {
         )
     }
 
+    renderFilter(){
+        //this.state.filterの状態に応じて取得する政党リストを抽出する
+        const filters = this.state.filter
+        console.log('ふぃるた〜', filters)
+        const seitoObjAfterFilter = []
+
+        seitoObj.map(seitoList => {
+            let trueCount = 0
+            const attribute = seitoList.attribute
+
+            filters.map(filter => {
+                const filterBool = attribute.findIndex(item => item === filter)
+                if(filterBool > -1){trueCount = trueCount + 1}
+            })
+            if(trueCount == filters.length){
+                seitoObjAfterFilter.push(seitoList)
+            }
+        })
+
+        let seitoCount = seitoObjAfterFilter.length
+
+         // Result件数の絞り込み
+        let ResultMsg = ''
+        if(seitoCount == seitoObj.length){
+            ResultMsg = 'の政党があります'
+        } else if(seitoCount == 0){
+            ResultMsg = 'です。該当の政党はありませんでした'
+        } else {
+            ResultMsg = 'まで政党を絞り込みました'
+        }
+
+        return(
+            <Result
+                msg1={seitoCount}
+                msg2={ResultMsg}
+            />
+        )
+    }
+
     renderSeito(){
         //this.state.filterの状態に応じて取得する政党リストを抽出する
         const filters = this.state.filter
         console.log('ふぃるた〜', filters)
-
         const seitoObjAfterFilter = []
 
         seitoObj.map(seitoList => {
@@ -201,9 +219,33 @@ export default class Body extends Component {
                 />
             );  
         });
+
         return (
             <SeitoCard>{results}</SeitoCard>
         );
+    }
+
+    handleClick(attribute, index) {
+        const changeBtnColor = this.state.btnStyle
+        //重複したボタンのインデックスなら削除
+        const deleteClassIndex = changeBtnColor.findIndex(item => item === index)
+        if(deleteClassIndex > -1){
+            changeBtnColor.splice(deleteClassIndex, 1)
+            this.setState({ btnStyle: changeBtnColor })
+        } else {
+            changeBtnColor.push(index)
+            this.setState({ btnStyle: changeBtnColor})
+        }
+
+        const attributes = this.state.filter
+        //重複を探して削除
+        const deleteIndex = attributes.findIndex(item => item === attribute.join())
+        if(deleteIndex > -1){
+            attributes.splice(deleteIndex, 1)
+            return this.setState({ filter: attributes })
+        }        
+        attributes.push(attribute.join())
+        this.setState({ filter: attributes })
     }
 
     render() {        
@@ -214,7 +256,7 @@ export default class Body extends Component {
                     <p>好きなフィルターを選んでね♪</p>
                 </Description>
                 {this.renderBtn()}
-                <Result/>
+                {this.renderFilter()}
                 {this.renderSeito()}
             </BodyContent>
         );

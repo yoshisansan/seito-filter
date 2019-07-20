@@ -16,9 +16,6 @@ const App = () => {
       <Wrapper>
         <Header />
         <Body />
-          <div className="App">
-            テスト
-          </div>
         <Footer />
       </Wrapper>
     </React.Fragment>

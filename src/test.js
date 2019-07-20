@@ -4,7 +4,6 @@ var a = [1,2,3,3,2,2,5];
 var b = a.filter(function (x, i, self) {
             console.log(x, i, self)
             return self.indexOf(x) === i;
-            
         });
 
 // 重複のみをリスト
