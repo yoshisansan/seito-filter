@@ -3,7 +3,6 @@
 //文字サイズのレスポンス対応
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { seitoRender } from './Filter/FilterMethod';
 import { attributeBtn, seitoContents, seitoObj } from './SeitoData';
 
 import Filter from './Filter/Filter';
@@ -63,10 +62,6 @@ const BodyContent = styled.div`
     
 `
 
-const filterCreate = filter => {
-    console.log('テスト', filter)
-}
-
 export default class Body extends Component {
     constructor(props){
         super(props);
@@ -76,8 +71,12 @@ export default class Body extends Component {
     }
 
     handleClick(attribute) {
-        
         const attributes = this.state.filter
+        const deleteIndex = attributes.findIndex(item => item === attribute.join())
+        if(deleteIndex > -1){
+            attributes.pop(deleteIndex)
+            return this.setState({ filter: attributes })
+        }        
         attributes.push(attribute.join())
         this.setState({ filter: attributes })
     }
@@ -85,6 +84,8 @@ export default class Body extends Component {
     renderSeito(){
         //this.state.filterの状態に応じて取得する政党リストを抽出する
         const filters = this.state.filter
+        console.log('ふぃるた〜', filters)
+
         const seitoObjAfterFilter = []
 
         seitoObj.map(seitoList => {
@@ -122,17 +123,6 @@ export default class Body extends Component {
                 const index = attributeList.findIndex(item => item === attribute[i])
                 attributeIndex.push(index)
             }
-            
-            //ボタンタップ後のフィルタリング処理
-            // const filterLen = this.state.filter.length
-            // for(let i in filterLen){
-            //     console.log('OK')
-            //     //フィルタリング用の変数
-            //     const filterBool = attribute.findIndex(item => item == this.state.filter[i])
-            //     console.log(this.state.filter[0])
-            //     console.log('filter対象？',filterBool )
-            //     }
-
     
             //属性リストに格納しているアジェンダ情報を取得する
             const getAgendaInfo = []
