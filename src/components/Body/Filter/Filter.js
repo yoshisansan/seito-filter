@@ -13,15 +13,21 @@ const FlexBtn = styled.div`
         border:solid 0.4rem #ff7152;
         border-radius: 1rem;
     }
+
+    .changeColor {
+        background-color: #ff7152; 
+    }
 `
 
 export default class Filter extends Component {
     render() {
+        console.log(this.props.className)
         return (
-            <FlexBtn>
+            <FlexBtn >
                 <button 
-                    className="seitoBtn" 
-                    onClick={() => this.props.onClick(this.props.attribute)}
+                    key={this.props.key}
+                    className={this.props.className}
+                    onClick={() => this.props.onClick()}
                 >
                     {this.props.value}
                 </button>

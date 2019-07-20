@@ -67,18 +67,61 @@ export default class Body extends Component {
         super(props);
         this.state = {
             filter: [],
+            btnStyle: [],
         }
     }
 
-    handleClick(attribute) {
+    handleClick(attribute, index) {
+        const changeBtnColor = this.state.btnStyle
+        //重複したボタンのインデックスなら削除
+        const deleteClassIndex = changeBtnColor.findIndex(item => item === index)
+        if(deleteClassIndex > -1){
+            changeBtnColor.splice(deleteClassIndex, 1)
+            this.setState({ btnStyle: changeBtnColor })
+        } else {
+            changeBtnColor.push(index)
+            this.setState({ btnStyle: changeBtnColor})
+        }
+
         const attributes = this.state.filter
+        //重複を探して削除
         const deleteIndex = attributes.findIndex(item => item === attribute.join())
         if(deleteIndex > -1){
-            attributes.pop(deleteIndex)
+            attributes.splice(deleteIndex, 1)
             return this.setState({ filter: attributes })
         }        
         attributes.push(attribute.join())
         this.setState({ filter: attributes })
+    }
+
+    renderBtn(){
+        const btnList = attributeBtn.map((attribute, index, self) => {
+            // this.setState({ })
+            const getIndex = this.state.btnStyle
+            console.log(getIndex, index)
+            if(getIndex.indexOf(index) >= 0){
+                return (
+                    <Filter
+                    key={index}
+                    className="seitoBtn changeColor"
+                    value={Object.values(attribute)}                
+                    onClick={() => this.handleClick(Object.keys(attribute), index)}
+                />
+                )
+            }
+            return (
+                <Filter
+                    key={index}
+                    className="seitoBtn"
+                    value={Object.values(attribute)}                
+                    onClick={() => this.handleClick(Object.keys(attribute), index)}
+                />
+                );
+            });
+        
+        return (
+            <FilterButton>{btnList}</FilterButton>
+        )
     }
 
     renderSeito(){
@@ -163,21 +206,14 @@ export default class Body extends Component {
         );
     }
 
-    render() {
-        const btnList = attributeBtn.map((attribute) =>
-            <Filter
-                value={Object.values(attribute)}                
-                onClick={() => this.handleClick(Object.keys(attribute))}
-            />
-        );
-        
+    render() {        
         return (
             <BodyContent>
                 <Description>
                     <p>忙しい人は消去法で政党を選ぼう！</p>
                     <p>好きなフィルターを選んでね♪</p>
                 </Description>
-                <FilterButton>{btnList}</FilterButton>
+                {this.renderBtn()}
                 <Result/>
                 {this.renderSeito()}
             </BodyContent>
