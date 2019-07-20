@@ -8,6 +8,10 @@ const HeaderTitle = styled.div`
     .title {
         color: white;
         font-size: 6rem;
+
+        @media only screen and (max-width: 415px) {
+            font-size: 4rem;
+        }        
     }
 `
 

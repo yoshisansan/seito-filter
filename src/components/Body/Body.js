@@ -1,6 +1,6 @@
 //あとで修正
 //教育無償化の連続
-//文字サイズのレスポンス対応
+//twitterの埋め込み
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { attributeBtn, seitoContents, seitoObj } from './SeitoData';
@@ -16,6 +16,10 @@ const Description = styled.div`
     .p {
         padding: 1rem;
     }
+
+    @media only screen and (max-width: 415px) {
+        font-size: 3.5rem;
+    }        
 
 `
 
