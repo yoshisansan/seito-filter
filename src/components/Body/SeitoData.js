@@ -78,7 +78,7 @@ export const seitoObj = [
         'lgbt': '同性婚ではなく理解増進法（仮）の制定を目指す。',
         'secretLaw': null,
         'america': '日米同盟を強化。広範な分野での緊密な協力を通じて平時から緊急事態までの切れ目のない体制を強化し、抑止力・対処力を高めるべき。',
-        'attribute': ['taxDown','protectKenpo','dutySchoolFree','nuclearZero','keepAmerica'],
+        'attribute': ['taxUp','protectKenpo','dutySchoolFree','nuclearZero','keepAmerica'],
     },
     { 
         'name': '日本共産党',
@@ -133,7 +133,7 @@ export const seitoObj = [
         'lgbt': '同性婚の法改正に反対。',
         'secretLaw': null,
         'america': '日米同盟の維持',
-        'attribute': ['taxDown','changeKenpo','dutySchoolFree','univercityFree','nuclearGo','fairAmerica'],
+        'attribute': ['taxDown','changeKenpo','dutySchoolFree','nuclearGo','fairAmerica'],
     },
     { 
         'name': 'オリーブの木',

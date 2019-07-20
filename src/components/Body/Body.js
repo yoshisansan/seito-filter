@@ -3,6 +3,7 @@
 //文字サイズのレスポンス対応
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { seitoRender } from './Filter/FilterMethod';
 import { attributeBtn, seitoContents, seitoObj } from './SeitoData';
 
 import Filter from './Filter/Filter';
@@ -77,19 +78,35 @@ export default class Body extends Component {
     handleClick(attribute) {
         
         const attributes = this.state.filter
-        attributes.push(attribute)
+        attributes.push(attribute.join())
         this.setState({ filter: attributes })
-        filterCreate(this.state.filter)
-        // this.getfilter(this.state.filter)
-    }
-
-    getfliter(filter) {
-            console.log('filter作動')
     }
 
     renderSeito(){
-        const results = seitoObj.map(seitoList => {
-            const agendas = []
+        //this.state.filterの状態に応じて取得する政党リストを抽出する
+        const filters = this.state.filter
+        const seitoObjAfterFilter = []
+
+        seitoObj.map(seitoList => {
+            let trueCount = 0
+            const attribute = seitoList.attribute
+
+            filters.map(filter => {
+                const filterBool = attribute.findIndex(item => item === filter)
+                if(filterBool > -1){trueCount = trueCount + 1}
+            })
+            if(trueCount == filters.length){
+                seitoObjAfterFilter.push(seitoList)
+            }
+        }) 
+
+        let seitoLists = seitoObjAfterFilter
+
+        if(filters.length == 0){
+            seitoLists = seitoObj
+        }
+
+        const results = seitoLists.map(seitoList => {
             const attribute = seitoList.attribute
             
             //属性の全リストを扱いやすいように配列へ格納し直す
@@ -98,32 +115,43 @@ export default class Body extends Component {
                 const string = Object.keys(seitoContents[i]).join()
                 attributeList.push(string)
             }
-
+    
             //政党の各属性が属性リストの何番目に格納されているのかインデックスを抽出する
             const attributeIndex = []
             for(let i in attribute){
                 const index = attributeList.findIndex(item => item === attribute[i])
                 attributeIndex.push(index)
             }
+            
+            //ボタンタップ後のフィルタリング処理
+            // const filterLen = this.state.filter.length
+            // for(let i in filterLen){
+            //     console.log('OK')
+            //     //フィルタリング用の変数
+            //     const filterBool = attribute.findIndex(item => item == this.state.filter[i])
+            //     console.log(this.state.filter[0])
+            //     console.log('filter対象？',filterBool )
+            //     }
 
+    
             //属性リストに格納しているアジェンダ情報を取得する
             const getAgendaInfo = []
             for(let i in attributeIndex){
                 getAgendaInfo.push(seitoContents[attributeIndex[i]])
             }
-
+    
             //アジェンダ情報の配列に文章を追加で格納する
             const getAgenda = []
             for(let i in getAgendaInfo){
-
+    
                 const info = Object.values(getAgendaInfo[i])
                 const infoAttr = info[0][1]
                 const pushInfo = seitoList[infoAttr]
-
+    
                 getAgenda.push([info[0][0], info[0][1], pushInfo])
                 
             }
-
+    
             const agendaList = getAgenda.map(agenda => {
                 return (
                     <div className="seito-content">
@@ -132,7 +160,7 @@ export default class Body extends Component {
                     </div>
                 );
             })
-
+    
             return (
                 <Seito
                     name={seitoList.name}
@@ -145,10 +173,7 @@ export default class Body extends Component {
         );
     }
 
-
     render() {
-
-        
         const btnList = attributeBtn.map((attribute) =>
             <Filter
                 value={Object.values(attribute)}                
