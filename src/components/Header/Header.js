@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const HeaderTitle = styled.div`
+    font-family: 'Kosugi Maru', sans-serif;
     text-align: center;
     background-color: #ff7152;
     line-height: 8rem;

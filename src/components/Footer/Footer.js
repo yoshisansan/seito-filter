@@ -29,7 +29,7 @@ export default class Footer extends Component {
         return (
             <FooterSeito>
                 <div class="description">
-                    <li>Copyright© Twitterアカウント <a href="https://twitter.com/akifumiyoshimu">@akifumiyoshimu</a></li>
+                    <li>Copyrights © Twitterアカウント <a href="https://twitter.com/akifumiyoshimu">@akifumiyoshimu</a></li>
                     <li>「移動を暮らしに」をテーマにしたブログ <a href="https://basho.world">basho.world</a></li>
                 </div>
             </FooterSeito>
